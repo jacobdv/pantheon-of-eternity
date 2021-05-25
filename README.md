@@ -10,8 +10,7 @@ https://www.quandl.com/data/UMICH-Consumer-Sentiment?keyword=vehicle
 
 * Our initial plan it to use an iterative process to cycle through the vehicle stock text files and compile them into a single data frame.
 * We will then iterate through the data frame to append the monthly sentiment values as additional columns to the daily stock prices.
-* That initial large data frame will be used to train the model using sentiment values: Date	Good time to Buy	Uncertain	Bad time to Buy
+* That initial large data frame will be used to train the model using sentiment values: Good time to Buy,	Uncertain,	Bad time to Buy
 
-![image](https://user-images.githubusercontent.com/73665660/119438083-46b09b80-bcd4-11eb-9f11-0cefd75d09d6.png)
 
 
