@@ -1,1 +1,1 @@
-# pantheon-of-eternity
+# Pantheon of Eternity
