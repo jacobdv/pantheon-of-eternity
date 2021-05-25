@@ -2,11 +2,16 @@
 
 ## Project 3 Proposal
 
-Our proposal is to use the following compiled stock market data and apply a machine learning model to features such as various length "closing price averages" and "average daily volumes" to allow a user to evaluate a simple trading strategy for a particular stock.
+Our proposal is to use the following compiled stock market data from publicly traded car companies to see if we can develop a model to predict stock prices over a given period using Consumer Sentiment in the University of Michigan polling on buying conditions for vehicles.
 
 https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs
 
-* Our initial plan it to use an iterative process to cycle through the stock text files and compile them into a single data frame.
-* We will then iterate through the data frame again to calculate a moving average closing price for a previous period.
-* That initial large data frame will be used to train the model using closing price and volume differences from the average closing values as features for the model.
-* Then we're hoping to produce a "front-end" component that will allow a user to enter a particular stock and return the optimal moving average values to focus on.
+https://www.quandl.com/data/UMICH-Consumer-Sentiment?keyword=vehicle
+
+* Our initial plan it to use an iterative process to cycle through the vehicle stock text files and compile them into a single data frame.
+* We will then iterate through the data frame to append the monthly sentiment values as additional columns to the daily stock prices.
+* That initial large data frame will be used to train the model using sentiment values: Date	Good time to Buy	Uncertain	Bad time to Buy
+
+![image](https://user-images.githubusercontent.com/73665660/119438083-46b09b80-bcd4-11eb-9f11-0cefd75d09d6.png)
+
+
