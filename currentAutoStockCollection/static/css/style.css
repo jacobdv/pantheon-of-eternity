@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+}
+
+#stockNavBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navLI {
+    display: inline;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.active {
+    color: blueviolet;
+    font-weight: bold;
+}
+.inactive {
+    text-decoration: none;
+    color: gray;
+    font-weight: lighter;
+}
+.inactive:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
