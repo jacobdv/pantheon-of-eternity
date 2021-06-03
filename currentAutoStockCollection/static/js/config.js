@@ -1,1 +1,0 @@
-let finnhub_API_Key = 'c2e4tiqad3iefdo6s6f0';
