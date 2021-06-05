@@ -8,8 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Model
-model = tf.keras.model.load_model('')
-print(model.summary())
+model = tf.keras.models.load_model('saved_model/')
 
 # Routes
 @app.route("/")
