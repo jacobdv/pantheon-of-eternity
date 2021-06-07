@@ -38,7 +38,11 @@ print(model.summary())
 def index():
     return render_template("index.html")
 
-@app.route('/date/')
+@app.route('/interactive/')
+def interactive():
+    return render_template('interactive.html')
+
+@app.route('/api/v1/allData/')
 def mongoDatabase():
     collection = db['car_stocks_2017']
     data = list(collection.find())
