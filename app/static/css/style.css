@@ -1,18 +1,50 @@
+/* NavBar Styling */
+#navDiv {
+    border-bottom: 2px solid black;
+    background-color: lightblue;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+}
+
 /* Link Styling */
 a {
     text-decoration: none;
     color: black;
-    padding: 0px 4px 0px 4px;
+    padding: 0px 8px 0px 8px;
 }
 .active {
     text-decoration: none;
     font-weight: bold;
 }
+.active:hover {
+    color: dimgray;
+    cursor: pointer;
+}
 .inactive:hover {
     text-decoration: underline;
     color: black;
+    cursor: pointer;
 }
 .inactive:active {
     text-decoration: underline;
     color: dimgray;
+}
+
+/* Stock Selection List */
+#stockSelection {
+    padding: 20px 0px 20px 0px;
+}
+#stockSelectionHeader {
+    padding: 0px;
+    margin: 0px;
+    text-decoration: underline;
+}
+#stockList {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.stockLink {
+    padding: 0px;
+    margin: 0px;
 }
