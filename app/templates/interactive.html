@@ -11,9 +11,42 @@
         <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     </head>
     <body>
+        <div id='navDiv'>
+            <h1 id='navTitle'>Pantheon of Eternity</h1>
+            <ul id='navList'>
+                <a class='pageLink inactive' href='/'>Home</a>
+                <a class='pageLink active' href='/interactive/'>Interactive</a>
+            </ul>
+        </div>
         <div class='container'>
             <div class='row'>
-                <div class='col-12'>
+                <div class='col-2'>
+                    <div id='stockSelection'>
+                        <h5 id='stockSelectionHeader'>Stocks</h5>
+                        <ul id='stockList'>
+                            <li><a value='F' class='stockLink active'>F</a></li>
+                            <li><a value='GM' class='stockLink inactive'>GM</a></li>
+                            <li><a value='HMC' class='stockLink inactive'>HMC</a></li>
+                            <li><a value='RACE' class='stockLink inactive'>RACE</a></li>
+                            <li><a value='TM' class='stockLink inactive'>TM</a></li>
+                            <li><a value='TTM' class='stockLink inactive'>TTM</a></li>
+                        </ul>
+                    </div>
+                    <div id='dateSelection'>
+                        <h5 id='dateSelectionHeader'>Date:</h5>
+                        <select id='dateDataset'>
+                            <option>11/1/2017</option>
+                            <option>11/2/2017</option>
+                            <option>11/3/2017</option>
+                            <option>11/6/2017</option>
+                            <option>11/7/2017</option>
+                            <option>11/8/2017</option>
+                            <option>11/9/2017</option>
+                            <option>11/10/2017</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='col-10'>
                     <div id='chart'>
 
                     </div>
@@ -28,7 +61,6 @@
         <!-- Bootstrap Script -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
         <!-- Javascript-->
-        <script type='text/javascript' src='../static/js/nav.js'></script>
         <script type='text/javascript' src='../static/js/interactive.js'></script>
         <script type='text/javascript' src='../static/js/chart.js'></script>
     </body>
