@@ -30,27 +30,11 @@ a {
     color: dimgray;
 }
 
-/* Stock Selection List */
-#stockSelection {
-    margin: 20px 0px 20px 0px;
-}
-#stockSelectionHeader {
-    padding: 0px;
-    margin: 0px;
-    text-decoration: underline;
-}
-#stockList {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-}
-.stockLink {
-    padding: 0px;
-    margin: 0px;
-}
-
 /* Chart Styling */
 #chart {
-    /* border: 2px solid black; */
     margin: 20px 0px 20px 10px;
+}
+
+#dateSelection {
+    margin: 20px 0px 0px 0px;
 }
