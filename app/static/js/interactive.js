@@ -56,7 +56,7 @@ function dataCharting(activeDate) {
             .selectAll('circle')
             .data(allStockData)
             .join('circle')
-            .attr('cx', d => xTimeScale(d[xVar]))
+            .attr('cx', d => d3.timeParse('%Y-%m-%d')(d.Date))
             .attr('cy', d => yLinearScale(d[yVar]))
             .attr('r', 2)
             .attr('fill', 'cornflowerblue')

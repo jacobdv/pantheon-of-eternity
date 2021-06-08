@@ -26,7 +26,7 @@ function renderCircles(circlesGroup, newXScale, newYScale, xVariable, yVariable)
     circlesGroup
         .transition()
         .duration(1000)
-        .attr('cx', d => newXScale(d[xVariable]))
+        .attr('cx', d => d3.timeParse('%Y-%m-%d')(d.Date))
         .attr('cy', d => newYScale(d[yVariable]));
     console.log(circlesGroup)
     return circlesGroup;
