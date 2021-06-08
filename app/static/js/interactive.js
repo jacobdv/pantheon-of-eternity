@@ -18,11 +18,8 @@ function dataCharting(activeDate) {
     
     chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-    console.log('--------------------')
-    console.log(`Active Date: ${activeDate}`)
-
-    let selectedDayObject = {};
-    let stockArray = [];
+    console.log('--------------------');
+    console.log(`Active Date: ${activeDate}`);
 
     // JSON grab for selected day only and for selected stock as a whole.
     Promise.all([d3.json(`/api/v1/${activeDate}/`),(d3.json(`/api/v1/stockData/`))]).then((data) => {
@@ -32,10 +29,10 @@ function dataCharting(activeDate) {
         let allStockData = data[1];
 
         // Values for Charting
-        let yVar = 'Volume';
+        let yVar = 'Relative';
         let xVar = 'Date';
 
-        let xTimeScale = xScale(allStockData, xVar)
+        let xTimeScale = xScale(allStockData, xVar);
         const bottomAxis = d3
             .axisBottom(xTimeScale);
         let xAxis = chartGroup
@@ -66,38 +63,23 @@ function dataCharting(activeDate) {
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 
-// Listener for stock selection changes.
-// let stockList = d3.select('#stockList');
-// stockList.selectAll('a').on('click', function() {
-//     // Resets inactive stocks and sets formatting on active stock.
-//     let resetList = stockList.selectAll('a').classed('active',false).classed('inactive',true);
-//     let selectedStock = d3.select(this);
-//     selectedStock.classed('active',true).classed('inactive',false);
 
-//     // Sets selected stock just to value.
-//     selectedStock = selectedStock.attr('value');
-//     console.log(`Click @ StockSelection => ${selectedStock}`)
-//     if (selectedStock !== activeStock) {
-//         activeStock = selectedStock;
-//         dataCharting(activeStock, activeDate);
-//     };
-// });
 
 // Listener for date selection changes.
 function reformatDate(dateIn) {
-    let segments = dateIn.split('/')
+    let segments = dateIn.split('/');
     let dateOut = `${segments[2]}-${segments[0]}-${segments[1]}`;
     return dateOut;
-}
+};
 let dateList = d3.select('#dateDataset');
 dateList.on('change', function() {
     let selectedDate = dateList.property('value');
     selectedDate = reformatDate(selectedDate);
     if (selectedDate !== activeDate) {
         activeDate = selectedDate;
-        dataCharting(activeDate)
-    }
-})
+        dataCharting(activeDate);
+    };
+});
 
 // Loads Ford data on page load.
 function onPageLoad() {
