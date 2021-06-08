@@ -86,9 +86,9 @@ def mongoDatabase(date):
 
     return json.dumps((avg, singleValue), default=json_util.default)
 
-@app.route('/api/v1/stockData/<stock>/', methods=['GET','POST'])
+@app.route('/api/v1/stockData/', methods=['GET','POST'])
 def allData(stock):
-    data = list(collection.find({ f'Symbol_{stock}':1 }))
+    data = list(collection.find({},{'_id': 0}))
     return json.dumps(data, default=json_util.default)
 
 # Debug
