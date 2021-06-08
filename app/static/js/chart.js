@@ -1,6 +1,6 @@
 const format = d3.timeFormat('%Y-%m-%d');
-const minDate = format.parse('2017-01-01');
-const maxDate = format.parse('2017-11-10');
+const minDate = format('2017-01-01');
+const maxDate = format('2017-11-10');
 
 /*
 Functions for drawing the chart and updating it.
