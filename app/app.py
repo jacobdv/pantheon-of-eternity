@@ -1,6 +1,7 @@
 # Dependencies
 from flask import Flask, render_template, redirect, url_for, jsonify, request
 from flask_cors import CORS
+from tensorflow.python.keras.backend import global_learning_phase_is_set
 from flask_pymongo import PyMongo
 import pymongo
 import tensorflow as tf
@@ -11,6 +12,11 @@ from config import atlasPW
 import json
 from bson import json_util
 from bson.json_util import dumps
+
+# TensorFlow
+from tensorflow.keras.layers.experimental import preprocessing
+import numpy as np
+import os
 
 # Pulling current date.
 date = dt.date.today()
@@ -25,8 +31,8 @@ CORS(app)
 # MongoDB Atlas Connection
 client = pymongo.MongoClient(f'mongodb+srv://readonly:{atlasPW}@cluster0.6oig2.mongodb.net/test?authSource=admin&replicaSet=atlas-aont1m-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
 db = client['stocks']
-app.config['DEBUG'] = True
-app.config['MONGO_URI'] = f'mongodb+srv://readonly:{atlasPW}@cluster0.6oig2.mongodb.net/test?authSource=admin&replicaSet=atlas-aont1m-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
+app.config['DEBUG'] = True # MAYBE CHANGE HERE
+os.environ['MONGO_URI'] = f'mongodb+srv://readonly:{atlasPW}@cluster0.6oig2.mongodb.net/test?authSource=admin&replicaSet=atlas-aont1m-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
 mongo = PyMongo(app)
 collection = db['car_stocks_2017']
 
@@ -44,32 +50,38 @@ def index():
 def interactive():
     return render_template('interactive.html')
 
-@app.route('/api/v1/<stock>/<date>/', methods=['GET','POST'])
-def mongoDatabase(stock, date):
-    stockData = list(collection.find( { f'Symbol_{stock}': 1 }))
+@app.route('/api/v1/<date>/', methods=['GET','POST'])
+def mongoDatabase(date):
     date = date.split('-')
     year = float(date[0])
     month = float(date[1])
     day = float(date[2])
-    singleValue = list(collection.find({ 'Year': year, 'Month': month, 'Day': day, f'Symbol_{stock}': 1 }))
-    
-    v = singleValue[0]
-    modelArray = [v['Year'],
-            v['Month'],
-            v['Day'],
-            v['Open'],
-            v['Close'],
-            v['Volume'],
-            v['Symbol_F'],
-            v['Symbol_GM'],
-            v['Symbol_HMC'],
-            v['Symbol_RACE'],
-            v['Symbol_TTM'],
-            v['Symbol_TM']]
-    result = model.evaluate(modelArray)
-    print(result)
+    singleValue = list(collection.find({ 'Year': year, 'Month': month, 'Day': day },{'_id': 0}))
 
-    return json.dumps((result, singleValue), default=json_util.default)
+    modelArray = []
+    for stock in singleValue:
+        objectArray = []
+        objectArray.append(stock['Year'])
+        objectArray.append(stock['Month'])
+        objectArray.append(stock['Day'])
+        objectArray.append(stock['Open'])
+        objectArray.append(stock['Close'])
+        objectArray.append(stock['Volume'])
+        objectArray.append(stock['Symbol_F'])
+        objectArray.append(stock['Symbol_GM'])
+        objectArray.append(stock['Symbol_HMC'])
+        objectArray.append(stock['Symbol_RACE'])
+        objectArray.append(stock['Symbol_TM'])
+        objectArray.append(stock['Symbol_TTM'])
+        modelArray.append(objectArray)
+
+    normalizer = preprocessing.Normalization()
+    normalizer.adapt(np.array(modelArray))
+
+    result = model.predict(modelArray).flatten()
+    avg = result.sum()/len(modelArray)
+
+    return json.dumps((avg, singleValue), default=json_util.default)
 
 @app.route('/api/v1/stockData/<stock>/', methods=['GET','POST'])
 def allData(stock):

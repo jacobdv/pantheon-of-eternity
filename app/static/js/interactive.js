@@ -28,7 +28,7 @@ function dataCharting(activeStock, activeDate) {
     let stockArray = [];
 
     // JSON grab for selected day only and for selected stock as a whole.
-    Promise.all([d3.json(`/api/v1/${activeStock}/${activeDate}/`),(d3.json(`/api/v1/stockData/${activeStock}`))]).then((data) => {
+    Promise.all([d3.json(`/api/v1/${activeDate}/`),(d3.json(`/api/v1/stockData/${activeStock}`))]).then((data) => {
         // Divides data from promise into its halves.
         singleDay = data[0];
         wholeStock = data[1];
