@@ -6,7 +6,6 @@ from flask_pymongo import PyMongo
 import pymongo
 import tensorflow as tf
 import datetime as dt
-from config import atlasPW
 
 # Additional tools for API routes.
 import json
@@ -29,15 +28,15 @@ app = Flask(__name__)
 CORS(app)
 
 # MongoDB Atlas Connection
-client = pymongo.MongoClient(f'mongodb+srv://readonly:{atlasPW}@cluster0.6oig2.mongodb.net/test?authSource=admin&replicaSet=atlas-aont1m-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+client = pymongo.MongoClient(os.environ['MONGO_URI'])
 db = client['stocks']
 app.config['DEBUG'] = True # MAYBE CHANGE HERE
-os.environ['MONGO_URI'] = f'mongodb+srv://readonly:{atlasPW}@cluster0.6oig2.mongodb.net/test?authSource=admin&replicaSet=atlas-aont1m-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
+app.config['MONGO_URI'] = os.environ['MONGO_URI']
 mongo = PyMongo(app)
 collection = db['car_stocks_2017']
 
 # Model
-model = tf.keras.models.load_model('saved_model')
+model = tf.keras.models.load_model('app/saved_model')
 model.build()
 print(model.summary())
 
@@ -49,6 +48,10 @@ def index():
 @app.route('/interactive/')
 def interactive():
     return render_template('interactive.html')
+
+@app.route('/analysis/')
+def analysis():
+    return render_template('analysis.html')
 
 @app.route('/api/v1/<date>/', methods=['GET','POST'])
 def mongoDatabase(date):
