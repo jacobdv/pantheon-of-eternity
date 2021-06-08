@@ -44,11 +44,39 @@ def index():
 def interactive():
     return render_template('interactive.html')
 
-@app.route('/api/v1/allData/')
-def mongoDatabase():
-    data = list(collection.find())
-    return json.dumps(data, default=json_util.default)
+@app.route('/api/v1/<stock>/<date>/', methods=['GET','POST'])
+def mongoDatabase(stock, date):
+    stockData = list(collection.find( { f'Symbol_{stock}': 1 }))
+    date = date.split('-')
+    year = float(date[0])
+    month = float(date[1])
+    day = float(date[2])
+    singleValue = list(collection.find({ 'Year': year, 'Month': month, 'Day': day, f'Symbol_{stock}': 1 }))
+    
+    # Machine Learning goes in here and does update per click.
+    # v = singleValue[0]
+    # modelArray = [[v['Year'],
+    #         v['Month'],
+    #         v['Day'],
+    #         v['Open'],
+    #         v['Close'],
+    #         v['Volume'],
+    #         v['Symbol_F'],
+    #         v['Symbol_GM'],
+    #         v['Symbol_HMC'],
+    #         v['Symbol_RACE'],
+    #         v['Symbol_TTM'],
+    #         v['Symbol_TM']]]
+    # result = model.evaluate(modelArray)
+    # print(result)
+    result = (f'${stock} 151')
 
+    return json.dumps((result, singleValue), default=json_util.default)
+
+@app.route('/api/v1/stockData/<stock>/', methods=['GET','POST'])
+def allData(stock):
+    data = list(collection.find({ f'Symbol_{stock}':1 }))
+    return json.dumps(data, default=json_util.default)
 
 # Debug
 if __name__ == "__main__":

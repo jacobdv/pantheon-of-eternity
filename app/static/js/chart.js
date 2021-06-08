@@ -1,13 +1,3 @@
-const svgH = 500;
-const svgW = 960;
-const margin = { top:20, right:40, bottom:80, left:100 };
-const chartH = svgH - (margin.top + margin.bottom);
-const chartW = svgW - (margin.left + margin.right);
-
-const svg = d3.select('chart').append('svg').attr('height', svgH).attr('width', svgW);
-const chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-
 /*
 Functions for drawing the chart and updating it.
 */

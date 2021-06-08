@@ -32,7 +32,7 @@ a {
 
 /* Stock Selection List */
 #stockSelection {
-    padding: 20px 0px 20px 0px;
+    margin: 20px 0px 20px 0px;
 }
 #stockSelectionHeader {
     padding: 0px;
@@ -47,4 +47,10 @@ a {
 .stockLink {
     padding: 0px;
     margin: 0px;
+}
+
+/* Chart Styling */
+#chart {
+    border: 2px solid black;
+    margin: 20px 0px 20px 10px;
 }

@@ -1,58 +1,99 @@
-// Setting Up Variables
-let allDataLink = '/api/v1/allData/';
+// Charting values.
+const svgH = 500;
+const svgW = 500;
+const margin = { top:20, right:40, bottom:80, left:100 };
+const chartH = svgH - (margin.top + margin.bottom);
+const chartW = svgW - (margin.left + margin.right);
+
+let svg = d3.select('#chart').append('svg').attr('height', svgH).attr('width', svgW);
+let chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
 // Defaults to Ford as active stock.
 let activeStock = 'F';
 let activeDate = '2017-11-1'
 
 // Data
 function dataCharting(activeStock, activeDate) {
+
+    let reset = d3.selectAll('g')
+    reset.remove()
+    
+    chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
     console.log('--------------------')
     console.log(`Active Stock: ${activeStock}`)
     console.log(`Active Date: ${activeDate}`)
-    let selectedEverything = '';
-    let interactiveData = [];
-    d3.json(allDataLink).then(data => {
-        data.forEach(row => {
-            // Checking Symbol
-            let symbol = '';
-            if (row.Symbol_F === 1) {
-                symbol = 'F';
-            } else if (row.Symbol_GM === 1) {
-                symbol = 'GM';
-            } else if (row.Symbol_HMC === 1) {
-                symbol = 'HMC';
-            } else if (row.Symbol_RACE === 1) {
-                symbol = 'RACE';
-            } else if (row.Symbol_TM === 1) {
-                symbol = 'TM';
-            } else if (row.Symbol_TTM === 1) {
-                symbol = 'TTM';
-            };
 
-            // Creating Object
-            let dataObj = {
-                'Symbol': symbol,
-                'Prices': {
-                    'Open': row.Open,
-                    'Close': row.Close,
-                },
-                'Date': `${row.Year}-${row.Month}-${row.Day}`
-}
-            if (dataObj.Symbol === activeStock) {
-                if (dataObj.Date === activeDate) {
-                    // This is object for the selected symbol and day.
-                    selectedEverything = dataObj;
-                }
-                // Pushing Data Object to Array
-                interactiveData.push(dataObj);
+    let selectedDayObject = {};
+    let stockArray = [];
+
+    // JSON grab for selected day only and for selected stock as a whole.
+    Promise.all([d3.json(`/api/v1/${activeStock}/${activeDate}/`),(d3.json(`/api/v1/stockData/${activeStock}`))]).then((data) => {
+        // Divides data from promise into its halves.
+        singleDay = data[0];
+        wholeStock = data[1];
+        
+        // Console.log for clarity.
+        console.log(`ML On Click: ${singleDay[0]}`);
+
+        singleDayData = singleDay[1][0];
+        selectedDayObject = {
+            'Symbol': activeStock,
+            'Open': singleDayData.Open,
+            'Close': singleDayData.Close,
+            'Volume': singleDayData.Volume,
+            'Date': `${singleDayData.Year}-${singleDayData.Month}-${singleDayData.Day}`
+        }
+        console.log('Daily Stock Object:')
+        console.log(selectedDayObject);
+
+        // Data organization and reformatting for whole stock.
+        wholeStock.forEach(day => {
+            let dailyObject = {
+                'Symbol': activeStock,
+                'Open': day.Open,
+                'Close': day.Close,
+                'Volume': day.Volume,
+                'Date': `${day.Year}-${day.Month}-${day.Day}`
             }
-
-            
+            stockArray.push(dailyObject);
         });
-        console.log(selectedEverything)
-        console.log(interactiveData)
-    });
-};
+        console.log('Whole Stock Array:')
+        console.log(stockArray);
+
+        let yVar = 'Volume';
+        let xVar = 'Close';
+
+        let xLinearScale = xScale(wholeStock, xVar)
+        const bottomAxis = d3
+            .axisBottom(xLinearScale);
+        let xAxis = chartGroup
+            .append('g')
+            .classed('x-axis', true)
+            .attr('transform', `translate(0, ${chartH})`)
+            .call(bottomAxis);
+        xAxis = renderX(xLinearScale, xAxis);
+        let yLinearScale = yScale(wholeStock, yVar);
+        const leftAxis = d3
+            .axisLeft(yLinearScale);
+        let yAxis = chartGroup
+            .append('g')
+            .classed('y-axis', true)
+            .call(leftAxis);
+        yAxis = renderY(yLinearScale, yAxis);
+        let circlesGroup = chartGroup
+            .selectAll('circle')
+            .data(wholeStock)
+            .join('circle')
+            .attr('cx', d => xLinearScale(d[xVar]))
+            .attr('cy', d => yLinearScale(d[yVar]))
+            .attr('r', 2)
+            .attr('fill', 'cornflowerblue')
+            .attr('opacity', 0.95)
+            .attr('stroke', 'black')
+            .attr('stroke-width', 1);
+    }); // End of Promise.all with JSON grabs.
+}; // End of Data Charting Function
 
 // Listener for stock selection changes.
 let stockList = d3.select('#stockList');
