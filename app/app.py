@@ -50,6 +50,10 @@ def index():
 def interactive():
     return render_template('interactive.html')
 
+@app.route('/analysis/')
+def analysis():
+    return render_template('analysis.html')
+
 @app.route('/api/v1/<date>/', methods=['GET','POST'])
 def mongoDatabase(date):
     date = date.split('-')
