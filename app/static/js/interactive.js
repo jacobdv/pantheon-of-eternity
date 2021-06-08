@@ -1,6 +1,6 @@
 // Charting values.
-const svgH = 500;
-const svgW = 500;
+const svgH = 400;
+const svgW = 600;
 const margin = { top:20, right:40, bottom:80, left:100 };
 const chartH = svgH - (margin.top + margin.bottom);
 const chartW = svgW - (margin.left + margin.right);
@@ -92,6 +92,17 @@ function dataCharting(activeStock, activeDate) {
             .attr('opacity', 0.95)
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
+        const xGroup = chartGroup
+            .append('g')
+            .attr("transform", `translate(${chartW / 2}, ${chartH + 20})`);
+        const xLabel = xGroup.append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -(chartH/2))
+            .attr('y', -50)
+            .attr('value', 'closingPrice')
+            .text('Closing Price');
+        const yGroup = chartGroup
+            .append('g');
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 

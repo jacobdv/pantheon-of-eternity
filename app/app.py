@@ -53,23 +53,21 @@ def mongoDatabase(stock, date):
     day = float(date[2])
     singleValue = list(collection.find({ 'Year': year, 'Month': month, 'Day': day, f'Symbol_{stock}': 1 }))
     
-    # Machine Learning goes in here and does update per click.
-    # v = singleValue[0]
-    # modelArray = [[v['Year'],
-    #         v['Month'],
-    #         v['Day'],
-    #         v['Open'],
-    #         v['Close'],
-    #         v['Volume'],
-    #         v['Symbol_F'],
-    #         v['Symbol_GM'],
-    #         v['Symbol_HMC'],
-    #         v['Symbol_RACE'],
-    #         v['Symbol_TTM'],
-    #         v['Symbol_TM']]]
-    # result = model.evaluate(modelArray)
-    # print(result)
-    result = (f'${stock} 151')
+    v = singleValue[0]
+    modelArray = [v['Year'],
+            v['Month'],
+            v['Day'],
+            v['Open'],
+            v['Close'],
+            v['Volume'],
+            v['Symbol_F'],
+            v['Symbol_GM'],
+            v['Symbol_HMC'],
+            v['Symbol_RACE'],
+            v['Symbol_TTM'],
+            v['Symbol_TM']]
+    result = model.evaluate(modelArray)
+    print(result)
 
     return json.dumps((result, singleValue), default=json_util.default)
 

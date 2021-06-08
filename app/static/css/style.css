@@ -51,6 +51,6 @@ a {
 
 /* Chart Styling */
 #chart {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     margin: 20px 0px 20px 10px;
 }
