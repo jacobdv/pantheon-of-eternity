@@ -28,12 +28,14 @@ function dataCharting(activeStock, activeDate) {
     let stockArray = [];
 
     // JSON grab for selected day only and for selected stock as a whole.
-    Promise.all([d3.json(`/api/v1/${activeDate}/`),(d3.json(`/api/v1/stockData/${activeStock}`))]).then((data) => {
+    Promise.all([d3.json(`/api/v1/${activeDate}/`),(d3.json(`/api/v1/stockData/`))]).then((data) => {
         let selectedDayRelative = data[0][0];
         let selectedDayStockData = data[0][1];
+        let part2 = data[1];
         
         console.log(selectedDayRelative);
         console.log(selectedDayStockData);
+        console.log(part2);
 
         singleDayData = singleDay[1][0];
         selectedDayObject = {
