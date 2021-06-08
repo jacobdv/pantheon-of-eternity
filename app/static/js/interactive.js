@@ -29,12 +29,11 @@ function dataCharting(activeStock, activeDate) {
 
     // JSON grab for selected day only and for selected stock as a whole.
     Promise.all([d3.json(`/api/v1/${activeDate}/`),(d3.json(`/api/v1/stockData/${activeStock}`))]).then((data) => {
-        // Divides data from promise into its halves.
-        singleDay = data[0];
-        wholeStock = data[1];
+        let selectedDayRelative = data[0][0];
+        let selectedDayStockData = data[0][1];
         
-        // Console.log for clarity.
-        console.log(`ML On Click: ${singleDay[0]}`);
+        console.log(selectedDayRelative);
+        console.log(selectedDayStockData);
 
         singleDayData = singleDay[1][0];
         selectedDayObject = {
@@ -42,7 +41,8 @@ function dataCharting(activeStock, activeDate) {
             'Open': singleDayData.Open,
             'Close': singleDayData.Close,
             'Volume': singleDayData.Volume,
-            'Date': `${singleDayData.Year}-${singleDayData.Month}-${singleDayData.Day}`
+            'Date': `${singleDayData.Year}-${singleDayData.Month}-${singleDayData.Day}`,
+            'Relative': singleDayData.Relative
         }
         console.log('Daily Stock Object:')
         console.log(selectedDayObject);
