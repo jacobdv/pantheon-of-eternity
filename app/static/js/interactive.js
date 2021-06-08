@@ -6,7 +6,10 @@ const chartH = svgH - (margin.top + margin.bottom);
 const chartW = svgW - (margin.left + margin.right);
 
 let svg = d3.select('#chart').append('svg').attr('height', svgH).attr('width', svgW);
+let chartTitle = svg.append('h1').attr('id','chartTitle').attr('value','chart').text('Average Relative Score in 2017');
 let chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+let xLabel;
+let yLabel;
 
 // Defaults to Ford as active stock.
 let activeDate = '2017-11-1';
