@@ -3,12 +3,11 @@ Functions for drawing the chart and updating it.
 */
 // Sets up x axis.
 function xScale(data, xVariable) {
-    const xLinearScale = d3
-        .scaleLinear()
+    const xTimeScale = d3
+        .scaleTime()
         .range([0, chartW])
-        .domain([d3.min(data, d => d[xVariable]) * 0.8,
-            (d3.max(data, d => d[xVariable])) * 1.2]);
-    return xLinearScale;
+        .domain([new Date('2017-01-01'), new Date('2017-11-10')]);
+    return xTimeScale;
 };
 // Sets up y axis.
 function yScale(data, yVariable) {
