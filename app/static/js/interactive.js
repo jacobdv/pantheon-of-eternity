@@ -37,74 +37,65 @@ function dataCharting(activeStock, activeDate) {
         console.log(selectedDayStockData);
         console.log(part2);
 
-        singleDayData = singleDay[1][0];
-        selectedDayObject = {
-            'Symbol': activeStock,
-            'Open': singleDayData.Open,
-            'Close': singleDayData.Close,
-            'Volume': singleDayData.Volume,
-            'Date': `${singleDayData.Year}-${singleDayData.Month}-${singleDayData.Day}`,
-            'Relative': singleDayData.Relative
-        }
-        console.log('Daily Stock Object:')
-        console.log(selectedDayObject);
+        // console.log('Daily Stock Object:')
+        // console.log(selectedDayObject);
 
-        // Data organization and reformatting for whole stock.
-        wholeStock.forEach(day => {
-            let dailyObject = {
-                'Symbol': activeStock,
-                'Open': day.Open,
-                'Close': day.Close,
-                'Volume': day.Volume,
-                'Date': `${day.Year}-${day.Month}-${day.Day}`
-            }
-            stockArray.push(dailyObject);
-        });
-        console.log('Whole Stock Array:')
-        console.log(stockArray);
+        // // Data organization and reformatting for whole stock.
+        // wholeStock.forEach(day => {
+        //     let dailyObject = {
+        //         'Symbol': activeStock,
+        //         'Open': day.Open,
+        //         'Close': day.Close,
+        //         'Volume': day.Volume,
+        //         'Date': `${day.Year}-${day.Month}-${day.Day}`
+        //     }
+        //     stockArray.push(dailyObject);
+        // });
+        // console.log('Whole Stock Array:')
+        // console.log(stockArray);
 
-        let yVar = 'Volume';
-        let xVar = 'Close';
+        // let yVar = 'Volume';
+        // let xVar = 'Close';
 
-        let xLinearScale = xScale(wholeStock, xVar)
-        const bottomAxis = d3
-            .axisBottom(xLinearScale);
-        let xAxis = chartGroup
-            .append('g')
-            .classed('x-axis', true)
-            .attr('transform', `translate(0, ${chartH})`)
-            .call(bottomAxis);
-        xAxis = renderX(xLinearScale, xAxis);
-        let yLinearScale = yScale(wholeStock, yVar);
-        const leftAxis = d3
-            .axisLeft(yLinearScale);
-        let yAxis = chartGroup
-            .append('g')
-            .classed('y-axis', true)
-            .call(leftAxis);
-        yAxis = renderY(yLinearScale, yAxis);
-        let circlesGroup = chartGroup
-            .selectAll('circle')
-            .data(wholeStock)
-            .join('circle')
-            .attr('cx', d => xLinearScale(d[xVar]))
-            .attr('cy', d => yLinearScale(d[yVar]))
-            .attr('r', 2)
-            .attr('fill', 'cornflowerblue')
-            .attr('opacity', 0.95)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 1);
-        const xGroup = chartGroup
-            .append('g')
-            .attr("transform", `translate(${chartW / 2}, ${chartH + 20})`);
-        const xLabel = xGroup.append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('x', -(chartH/2))
-            .attr('y', -50)
-            .attr('value', 'closingPrice')
-            .text('Closing Price');
-        const yGroup = chartGroup
-            .append('g');
+        // let xLinearScale = xScale(wholeStock, xVar)
+        // const bottomAxis = d3
+        //     .axisBottom(xLinearScale);
+        // let xAxis = chartGroup
+        //     .append('g')
+        //     .classed('x-axis', true)
+        //     .attr('transform', `translate(0, ${chartH})`)
+        //     .call(bottomAxis);
+        // xAxis = renderX(xLinearScale, xAxis);
+        // let yLinearScale = yScale(wholeStock, yVar);
+        // const leftAxis = d3
+        //     .axisLeft(yLinearScale);
+        // let yAxis = chartGroup
+        //     .append('g')
+        //     .classed('y-axis', true)
+        //     .call(leftAxis);
+        // yAxis = renderY(yLinearScale, yAxis);
+        // let circlesGroup = chartGroup
+        //     .selectAll('circle')
+        //     .data(wholeStock)
+        //     .join('circle')
+        //     .attr('cx', d => xLinearScale(d[xVar]))
+        //     .attr('cy', d => yLinearScale(d[yVar]))
+        //     .attr('r', 2)
+        //     .attr('fill', 'cornflowerblue')
+        //     .attr('opacity', 0.95)
+        //     .attr('stroke', 'black')
+        //     .attr('stroke-width', 1);
+        // const xGroup = chartGroup
+        //     .append('g')
+        //     .attr("transform", `translate(${chartW / 2}, ${chartH + 20})`);
+        // const xLabel = xGroup.append('text')
+        //     .attr('transform', 'rotate(-90)')
+        //     .attr('x', -(chartH/2))
+        //     .attr('y', -50)
+        //     .attr('value', 'closingPrice')
+        //     .text('Closing Price');
+        // const yGroup = chartGroup
+        //     .append('g');
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 
