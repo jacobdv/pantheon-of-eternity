@@ -1,6 +1,5 @@
-const format = d3.timeFormat('%Y-%m-%d');
-const minDate = format('2017-01-01');
-const maxDate = format('2017-11-10');
+const minDate = ('2017-01-01');
+const maxDate = ('2017-11-10');
 
 /*
 Functions for drawing the chart and updating it.
@@ -10,7 +9,7 @@ function xScale(data, xVariable) {
     const xTimeScale = d3
         .scaleTime()
         .range([0, chartW])
-        .domain([minDate, maxDate]);
+        .domain([d3.timeParse('%Y-%m-%d')(minDate), d3.timeParse('%Y-%m-%d')(maxDate)]);
     return xTimeScale;
 };
 // Sets up y axis.
