@@ -36,7 +36,7 @@ mongo = PyMongo(app)
 collection = db['car_stocks_2017']
 
 # Model
-model = tf.keras.models.load_model('saved_model')
+model = tf.keras.models.load_model('saved_model/')
 model.build()
 print(model.summary())
 
