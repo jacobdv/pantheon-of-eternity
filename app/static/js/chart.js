@@ -1,4 +1,4 @@
-const format = d3.time.format('%Y-%m-%d');
+const format = d3.timeFormat('%Y-%m-%d');
 const minDate = format.parse('2017-01-01');
 const maxDate = format.parse('2017-11-10');
 
