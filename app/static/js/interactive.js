@@ -29,7 +29,7 @@ function dataCharting(activeDate) {
 
         // Removes November Data
         let l = allStockData.length;
-        allStockData = allStockData.slice(0, (l-48))
+        allStockData = allStockData.slice(0, (l-48)) //48 for Nov, 180 to remove October
 
         // Values for Charting
         let yVar = 'Relative';
@@ -63,6 +63,7 @@ function dataCharting(activeDate) {
             .attr('opacity', 0.95);
 
         predictionGroup.selectAll('circle').remove();
+        predictionGroup.selectAll('rect').remove();
         let day = predictionGroup
             .append('circle')
             .attr('cx', xTimeScale(d3.timeParse('%Y-%m-%d')(activeDate)))
@@ -73,29 +74,67 @@ function dataCharting(activeDate) {
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
 
-        let top40 = predictionGroup
-            .append('rect')
-            .attr('x', 0).attr('y', 0)
-            .attr('width', chartW)
-            .attr('height', yLinearScale(145))
-            .attr('fill', 'mediumseagreen')
-            .attr('opacity', 0.2);
-        let mid20 = predictionGroup
-            .append('rect')
-            .attr('x', 0).attr('y', yLinearScale(145))
-            .attr('width', chartW)
-            .attr('height', yLinearScale(173.5))
-            .attr('fill', 'gold')
-            .attr('opacity', 0.2);
-        let bottom40 = predictionGroup
-            .append('rect')
-            .attr('x', 0).attr('y', yLinearScale(135))
-            .attr('width', chartW)
-            .attr('height', yLinearScale(156.5))
-            .attr('fill', 'firebrick')
-            .attr('opacity', 0.2);
+        // let top40 = predictionGroup
+        //     .append('rect')
+        //     .attr('x', 0).attr('y', 0)
+        //     .attr('width', chartW)
+        //     .attr('height', yLinearScale(145))
+        //     .attr('fill', 'mediumseagreen')
+        //     .attr('opacity', 0.2);
+        // let mid20 = predictionGroup
+        //     .append('rect')
+        //     .attr('x', 0).attr('y', yLinearScale(145))
+        //     .attr('width', chartW)
+        //     .attr('height', yLinearScale(172))
+        //     .attr('fill', 'gold')
+        //     .attr('opacity', 0.2);
+        // let bottom40 = predictionGroup
+        //     .append('rect')
+        //     .attr('x', 0).attr('y', yLinearScale(135))
+        //     .attr('width', chartW)
+        //     .attr('height', yLinearScale(156))
+        //     .attr('fill', 'firebrick')
+        //     .attr('opacity', 0.2);
+
+        let indicator = d3.select('#indicator');
+        indicator.append('rect').attr('x',0).attr('y',0).attr('height',50).attr('width',50).attr('fill',getIndicatorColor(selectedDayRelative)).attr('opacity',0.2)
+
+        let belowChart = d3.select('#belowChart');
+        belowChart.append('h1').attr('id','belowChartHeader').text(`${activeDate} Stock Prices`);
+        let stockPrices = belowChart.append('ul');
+        selectedDayStockData.forEach(stock => {
+            let stockSymbol = 'F'
+            if (parseInt(stock.Symbol_F) === 1) {
+                stockSymbol = 'F';
+            } else if (parseInt(stock.Symbol_GM) === 1) {
+                stockSymbol = 'GM';
+            } else if (parseInt(stock.Symbol_HMC) === 1) {
+                stockSymbol = 'HMC';
+            } else if (parseInt(stock.Symbol_RACE) === 1) {
+                stockSymbol = 'RACE';
+            } else if (parseInt(stock.Symbol_TM) === 1) {
+                stockSymbol = 'TM';
+            } else if (parseInt(stock.Symbol_TTM) === 1) {
+                stockSymbol = 'TTM';
+            }; 
+            stockPrices.append('li')
+                .classed('stockListBelowChart', true)
+                .attr('value', stockSymbol)
+                .text(`${stockSymbol} Closing Price: ${stock.Close}, Volume: ${stock.Volume}`);   
+        });
+
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
+
+function getIndicatorColor(value) {
+    if (value > 144) {
+        return 'mediumseagreen';
+    } else if (value > 134) {
+        return 'gold';
+    } else {
+        return 'firebrick';
+    }
+}
 
 // Listener for date selection changes.
 function reformatDate(dateIn) {
