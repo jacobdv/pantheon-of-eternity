@@ -28,7 +28,8 @@ function dataCharting(activeDate) {
         let allStockData = data[1];
 
         // Removes November Data
-        allStockData.splice(-8);
+        // allStockData.splice(-8);
+        allStockData = allStockData.slice(0,-7)
 
         // Values for Charting
         let yVar = 'Relative';
@@ -77,22 +78,22 @@ function dataCharting(activeDate) {
             .attr('x', 0).attr('y', 0)
             .attr('width', chartW)
             .attr('height', yLinearScale(145))
-            .attr('fill', 'green')
-            .attr('opacity', 0.3);
+            .attr('fill', 'mediumseagreen')
+            .attr('opacity', 0.2);
         let mid20 = predictionGroup
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(145))
             .attr('width', chartW)
             .attr('height', yLinearScale(10))
-            .attr('fill', 'yellow')
-            .attr('opacity', 0.3);
+            .attr('fill', 'gold')
+            .attr('opacity', 0.2);
         let bottom40 = predictionGroup
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(135))
             .attr('width', chartW)
-            .attr('height', yLinearScale(0))
-            .attr('fill', 'red')
-            .attr('opacity', 0.3);
+            .attr('height', yLinearScale(108))
+            .attr('fill', 'firebrick')
+            .attr('opacity', 0.2);
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 
