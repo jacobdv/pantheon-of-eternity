@@ -8,6 +8,7 @@ const chartW = svgW - (margin.left + margin.right);
 let svg = d3.select('#chart').append('svg').attr('height', svgH).attr('width', svgW);
 let chartTitle = svg.append('h1').attr('id','chartTitle').attr('value','chart').text('Average Relative Score in 2017');
 let chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+let predictionGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
 let xLabel;
 let yLabel;
 
@@ -59,8 +60,8 @@ function dataCharting(activeDate) {
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
 
-        day.remove();
-        let day =  chartGroup
+        predictionGroup.selectAll('circle').remove();
+        let day =  predictionGroup
             .append('circle')
             .attr('cx', xTimeScale(d3.timeParse('%Y-%m-%d')(activeDate)))
             .attr('cy', yLinearScale(selectedDayRelative))
