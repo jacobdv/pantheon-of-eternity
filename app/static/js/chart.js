@@ -5,7 +5,7 @@ const maxDate = ('2017-11-10');
 Functions for drawing the chart and updating it.
 */
 // Sets up x axis.
-function xScale(data, xVariable) {
+function xScale() {
     const xTimeScale = d3
         .scaleTime()
         .range([0, chartW])
