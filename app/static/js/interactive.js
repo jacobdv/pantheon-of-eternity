@@ -1,6 +1,6 @@
 // Charting values.
-const svgH = 400;
-const svgW = 600;
+const svgH = 600;
+const svgW = 900;
 const margin = { top:20, right:40, bottom:80, left:100 };
 const chartH = svgH - (margin.top + margin.bottom);
 const chartW = svgW - (margin.left + margin.right);
@@ -26,6 +26,9 @@ function dataCharting(activeDate) {
         let selectedDayRelative = data[0][0];
         let selectedDayStockData = data[0][1];
         let allStockData = data[1];
+
+        // Removes November Data
+        allStockData = allStockData.splice(-8);
 
         // Values for Charting
         let yVar = 'Relative';
@@ -54,22 +57,42 @@ function dataCharting(activeDate) {
             .join('circle')
             .attr('cx', d => xTimeScale(d3.timeParse('%Y-%m-%d')(`${parseInt(d.Year)}-${parseInt(d.Month)}-${parseInt(d.Day)}`)))
             .attr('cy', d => yLinearScale(d[yVar]))
-            .attr('r', 2)
+            .attr('r', 3)
             .attr('fill', 'cornflowerblue')
-            .attr('opacity', 0.95)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 1);
+            .attr('opacity', 0.95);
 
         predictionGroup.selectAll('circle').remove();
         let day =  predictionGroup
             .append('circle')
             .attr('cx', xTimeScale(d3.timeParse('%Y-%m-%d')(activeDate)))
             .attr('cy', yLinearScale(selectedDayRelative))
-            .attr('r',2)
+            .attr('r',4)
             .attr('fill', 'red')
             .attr('opacity', 0.95)
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
+
+        let top40 = predictionGroup
+            .append('rect')
+            .attr('x', 0).attr('y', 0)
+            .attr('width', chartW)
+            .attr('height', yLinearScale(145))
+            .attr('fill', 'green')
+            .attr('opacity', 0.5);
+        let mid20 = predictionGroup
+            .append('rect')
+            .attr('x', yLinearScale(145)).attr('y', 0)
+            .attr('width', chartW)
+            .attr('height', yLinearScale(10))
+            .attr('fill', 'yellow')
+            .attr('opacity', 0.5);;
+        let bottom40 = predictionGroup
+            .append('rect')
+            .attr('x', yLinearScale(135)).attr('y', 0)
+            .attr('width', chartW)
+            .attr('height', yLinearScale(0))
+            .attr('fill', 'red')
+            .attr('opacity', 0.5);;
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 
