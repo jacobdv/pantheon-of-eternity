@@ -29,7 +29,7 @@ function dataCharting(activeDate) {
 
         // Removes November Data
         // allStockData.splice(-8);
-        allStockData = allStockData.slice(0, (allStockData.length()-8))
+        allStockData = allStockData.slice(0, (allStockData.length-8))
 
         // Values for Charting
         let yVar = 'Relative';
