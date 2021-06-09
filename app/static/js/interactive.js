@@ -28,7 +28,7 @@ function dataCharting(activeDate) {
         let allStockData = data[1];
 
         // Removes November Data
-        allStockData = allStockData.splice(-8);
+        allStockData.splice(-8);
 
         // Values for Charting
         let yVar = 'Relative';
@@ -62,7 +62,7 @@ function dataCharting(activeDate) {
             .attr('opacity', 0.95);
 
         predictionGroup.selectAll('circle').remove();
-        let day =  predictionGroup
+        let day = predictionGroup
             .append('circle')
             .attr('cx', xTimeScale(d3.timeParse('%Y-%m-%d')(activeDate)))
             .attr('cy', yLinearScale(selectedDayRelative))
@@ -78,21 +78,21 @@ function dataCharting(activeDate) {
             .attr('width', chartW)
             .attr('height', yLinearScale(145))
             .attr('fill', 'green')
-            .attr('opacity', 0.5);
+            .attr('opacity', 0.3);
         let mid20 = predictionGroup
             .append('rect')
-            .attr('x', yLinearScale(145)).attr('y', 0)
+            .attr('x', 0).attr('y', yLinearScale(145))
             .attr('width', chartW)
             .attr('height', yLinearScale(10))
             .attr('fill', 'yellow')
-            .attr('opacity', 0.5);;
+            .attr('opacity', 0.3);
         let bottom40 = predictionGroup
             .append('rect')
-            .attr('x', yLinearScale(135)).attr('y', 0)
+            .attr('x', 0).attr('y', yLinearScale(135))
             .attr('width', chartW)
             .attr('height', yLinearScale(0))
             .attr('fill', 'red')
-            .attr('opacity', 0.5);;
+            .attr('opacity', 0.3);
     }); // End of Promise.all with JSON grabs.
 }; // End of Data Charting Function
 
