@@ -54,3 +54,7 @@ a {
 #indicator p {
     margin: 25px;
 }
+
+#chartHeader {
+    margin: 20px 0px 0px 20px;
+}
