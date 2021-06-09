@@ -84,14 +84,14 @@ function dataCharting(activeDate) {
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(145))
             .attr('width', chartW)
-            .attr('height', yLinearScale(173.5))
+            .attr('height', yLinearScale(172.5))
             .attr('fill', 'gold')
             .attr('opacity', 0.2);
         let bottom40 = predictionGroup
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(135))
             .attr('width', chartW)
-            .attr('height', yLinearScale(156.5))
+            .attr('height', yLinearScale(155.5))
             .attr('fill', 'firebrick')
             .attr('opacity', 0.2);
     }); // End of Promise.all with JSON grabs.
