@@ -29,7 +29,12 @@ function dataCharting(activeDate) {
 
         // Removes November Data
         // allStockData.splice(-8);
-        allStockData = allStockData.slice(0, (allStockData.length-8))
+        console.log('Length:')
+        console.log(allStockData.length)
+        let l = allStockData.length;
+        console.log(l)
+        allStockData = allStockData.slice(0, (l-8))
+        console.log(allStockData)
 
         // Values for Charting
         let yVar = 'Relative';
@@ -84,14 +89,14 @@ function dataCharting(activeDate) {
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(145))
             .attr('width', chartW)
-            .attr('height', yLinearScale(10))
+            .attr('height', yLinearScale(172))
             .attr('fill', 'gold')
             .attr('opacity', 0.2);
         let bottom40 = predictionGroup
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(135))
             .attr('width', chartW)
-            .attr('height', yLinearScale(27))
+            .attr('height', yLinearScale(155))
             .attr('fill', 'firebrick')
             .attr('opacity', 0.2);
     }); // End of Promise.all with JSON grabs.
