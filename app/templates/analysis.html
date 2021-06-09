@@ -25,16 +25,11 @@
     <section>
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 order-lg-2">
-                    <img src="/static/images/dataframe.JPG" alt="Merged Dataframe" width = 80%>
-                        <div id="container"></div>
-                    </figure>
-                </div>
                 <div class="col-lg-5 order-lg-1">
                     <div class="p-5">
                         <h3 class="display-7">Data Preprocessing</h3>
                         <!-- <p><strong>Data Sets:</strong><br> -->
-                        <a href="https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs" target="_blank">Kaggle - (6) Major Car Stocks going back to 2005</a><br>
+                        <strong><a href="https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs" target="_blank">Kaggle - (6) Major Car Stocks going back to 2005</a></strong><br>
                         <ul>
                             <li>Ford (F)</li>
                             <li>General Motors (GM)</li>
@@ -43,13 +38,18 @@
                             <li>Toyota (TM)</li>
                             <li>Tata Motors (TTM)</li>
                         </ul>
-                        <a href="https://www.quandl.com/data/UMICH/SOC37-University-of-Michigan-Consumer-Survey-Buying-Conditions-for-Vehicles" target="_blank">Quandl – University of Michigan Car Buying Sentiment</a>
+                        <strong><a href="https://www.quandl.com/data/UMICH/SOC37-University-of-Michigan-Consumer-Survey-Buying-Conditions-for-Vehicles" target="_blank">Quandl – University of Michigan Car Buying Sentiment</a></strong>
                         <ul>
                             <li>'Relative' Car Buying Sentiment <br> (Good Time to Buy - Bad Time to Buy + 100)</li>
                         </ul>
                         <p>*Dummy Encoding used to replace ticker symbols.</p>
                         </p>
                     </div>        
+                </div>
+                <div class="col-lg-7 order-lg-2">
+                    <img src="/static/images/dataframe.JPG" alt="Merged Dataframe" width = 100%>
+                        <div id="container"></div>
+                    </figure>
                 </div>
             </div>
         </div>
@@ -58,12 +58,7 @@
     <section>
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 order-lg-1">
-                    <img src="/static/images/model_summary.JPG" alt="Model Summary">
-                        <div id="container2"></div>
-                    </figure>
-                </div>
-                <div class="col-lg-5 order-lg-1">
+                <div class="col-lg-5 order-lg-2">
                     <div class="p-5">
                         <h3 class="display-7">Deep Neural Network Model</h3>
                         <p>Post preprocessing we knew a multiple linear regression was probably insufficient so we explored the TensorFlow library for a layered solution.
@@ -74,18 +69,24 @@
                         </p>
                     </div>
                 </div>
+                <div class="col-lg-7 order-lg-1">
+                    <img src="/static/images/model_summary.JPG" alt="Model Summary" width=100%>
+                        <div id="container2"></div>
+                    </figure>
+                </div>
             </div>
         </div>
     </section>
 
     <section>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 order-lg-2">
-                    <img src="/static/images/true_vs_predicted.JPG" alt="Actual vs. Predicted">
-                    <img src="/static/images/prediction_error.JPG" alt="Prediction Error">
-                </div>
-                <div class="col-lg-5 order-lg-1">
+            <!-- <div class="row align-items-center"> -->
+                <!-- <div class=".float-col-lg-7 order-lg-2">
+                    <img src="images/loss_history.JPG" alt="Loss History">
+                    <img src="images/true_vs_predicted.JPG" alt="Actual vs. Predicted">
+                    <img src="images/prediction_error.JPG" alt="Prediction Error">
+                </div> -->
+                <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
                         <h3 class="display-7">Results</h3>
                         <p>The finalized model was trained on stock data from January - October 2017 with the goal of trying to accurately predict
@@ -96,11 +97,15 @@
                                <li>Mean Absolute Percentage Error (MAPE) of 0.4899</li>
                             </ul>
                         </p>
-                        <img src="/static/images/loss_history.JPG" alt="Loss History">
+                        <div class ="container">
+                            <img src="/static/images/loss_history.JPG" alt="Loss History" width=400px>
+                            <img src="/static/images/true_vs_predicted.JPG" alt="Actual vs. Predicted" width=300px>
+                            <img src="/static/images/prediction_error.JPG" alt="Prediction Error" width=400px>
+                        </div>
                     </div>        
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </section>
 
     <!-- D3 Scripts -->
