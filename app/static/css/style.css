@@ -40,7 +40,7 @@ a {
 }
 
 #textAboveChart {
-    margin: 20px 0px 0px 0px;
+    margin: 30px 0px 0px 0px;
 }
 
 #indicator {
@@ -48,4 +48,9 @@ a {
     height: 100px;
     width: 100px;
     border: 2px solid black;
+    text-align: center;
+}
+
+#indicator p {
+    margin: 25px;
 }

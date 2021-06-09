@@ -9,8 +9,8 @@ let svg = d3.select('#chart').append('svg').attr('height', svgH).attr('width', s
 let chartTitle = svg.append('h1').attr('id','chartTitle').attr('value','chart').text('Average Relative Score in 2017');
 let chartGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
 let predictionGroup = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
-let xLabel;
-let yLabel;
+let xLabel = svg.append('text').classed('xLabel',true).attr('text-anchor','end').attr('x',chartW).attr('y',chartH-10).text('Month');
+let yLabel = svg.append('text').classed('yLabel',true).attr('text-anchor','end').attr('y',10).attr('dy','.75em').attr('transform','rotate(-90)').text('Relative Value');
 
 // Defaults to Ford as active stock.
 let activeDate = '2017-11-1';
@@ -121,7 +121,7 @@ function dataCharting(activeDate) {
             stockPrices.append('li')
                 .classed('stockListBelowChart', true)
                 .attr('value', stockSymbol)
-                .text(`${stockSymbol} Closing Price: ${stock.Close}, Volume: ${stock.Volume}`);   
+                .text(`${stockSymbol} Closing Price: $${stock.Close}, Volume: ${stock.Volume}`);   
         });
 
     }); // End of Promise.all with JSON grabs.
