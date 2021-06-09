@@ -21,6 +21,88 @@
             <a class='pageLink active' href='/analysis/'>Analysis</a>
         </ul>
     </div>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 order-lg-2">
+                    <img src="app/static/images/dataframe.JPG" alt="Merged Dataframe" width = 80%>
+                        <div id="container"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-5 order-lg-1">
+                    <div class="p-5">
+                        <h3 class="display-7">Data Preprocessing</h3>
+                        <!-- <p><strong>Data Sets:</strong><br> -->
+                        <a href="https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs" target="_blank">Kaggle - (6) Major Car Stocks going back to 2005</a><br>
+                        <ul>
+                            <li>Ford (F)</li>
+                            <li>General Motors (GM)</li>
+                            <li>Hyundai (HMC)</li>
+                            <li>Ferrari (RACE)</li>
+                            <li>Toyota (TM)</li>
+                            <li>Tata Motors (TTM)</li>
+                        </ul>
+                        <a href="https://www.quandl.com/data/UMICH/SOC37-University-of-Michigan-Consumer-Survey-Buying-Conditions-for-Vehicles" target="_blank">Quandl – University of Michigan Car Buying Sentiment</a>
+                        <ul>
+                            <li>'Relative' Car Buying Sentiment <br> (Good Time to Buy - Bad Time to Buy + 100)</li>
+                        </ul>
+                        <p>*Dummy Encoding used to replace ticker symbols.</p>
+                        </p>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 order-lg-1">
+                    <img src="app/static/images/model_summary.JPG" alt="Model Summary">
+                        <div id="container2"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-5 order-lg-1">
+                    <div class="p-5">
+                        <h3 class="display-7">Deep Neural Network Model</h3>
+                        <p>Post preprocessing we knew a multiple linear regression was probably insufficient so we explored the TensorFlow library for a layered solution.
+                        Their gas mileage prediction tutorial had some good recommendations that fit our data format. 
+                        (<a href="https://www.tensorflow.org/tutorials/keras/regression" target="_blank">TensorFlow - Gas Mileage Prediction Regression</a>)<br>
+                        We still used Sklearn's Train_Test_Split feature divide and test the data.  A Normalization layer was added based on the X_train data instead 
+                        of a scaler to account for the binary coding and to help the model converge.  The 'Relative' sentiment value was selected as the targeted label.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 order-lg-2">
+                    <img src="app/static/images/true_vs_predicted.JPG" alt="Actual vs. Predicted">
+                    <img src="app/static/images/prediction_error.JPG" alt="Prediction Error">
+                </div>
+                <div class="col-lg-5 order-lg-1">
+                    <div class="p-5">
+                        <h3 class="display-7">Results</h3>
+                        <p>The finalized model was trained on stock data from January - October 2017 with the goal of trying to accurately predict
+                           the sentiment value based on the known November stock data for the major car makers.  In testing the model returned: 
+                           <ul>
+                               <li>Epochs: 1200</li>
+                               <li>Mean Squared Error (MSE) loss value of 1.0960</li>
+                               <li>Mean Absolute Percentage Error (MAPE) of 0.4899</li>
+                            </ul>
+                        </p>
+                        <img src="images/loss_history.JPG" alt="Loss History">
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- D3 Scripts -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
