@@ -40,7 +40,7 @@ a {
 }
 
 #textAboveChart {
-    margin: 20px 0px 0px 0px;
+    margin: 30px 0px 0px 0px;
 }
 
 #indicator {
@@ -52,5 +52,5 @@ a {
 }
 
 #indicator p {
-    margin: 30px;
+    margin: 25px;
 }
