@@ -29,7 +29,7 @@ function dataCharting(activeDate) {
 
         // Removes November Data
         // allStockData.splice(-8);
-        allStockData = allStockData.slice(0,-7)
+        allStockData = allStockData.slice(0, (allStockData.length()-8))
 
         // Values for Charting
         let yVar = 'Relative';
@@ -91,7 +91,7 @@ function dataCharting(activeDate) {
             .append('rect')
             .attr('x', 0).attr('y', yLinearScale(135))
             .attr('width', chartW)
-            .attr('height', yLinearScale(108))
+            .attr('height', yLinearScale(27))
             .attr('fill', 'firebrick')
             .attr('opacity', 0.2);
     }); // End of Promise.all with JSON grabs.
