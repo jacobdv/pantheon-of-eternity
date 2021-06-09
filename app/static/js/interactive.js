@@ -100,6 +100,7 @@ function dataCharting(activeDate) {
         indicator.append('rect').attr('x',0).attr('y',0).attr('height',50).attr('width',50).attr('fill',getIndicatorColor(selectedDayRelative)).attr('opacity',0.2)
 
         let belowChart = d3.select('#belowChart');
+        belowChart.html('')
         belowChart.append('h1').attr('id','belowChartHeader').text(`${activeDate} Stock Prices`);
         let stockPrices = belowChart.append('ul');
         selectedDayStockData.forEach(stock => {
