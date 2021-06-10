@@ -29,11 +29,11 @@
                         <p id='chartParagraph'>Our model was trained on the first 10 months of 2017 using Sci Kit Learn's Train-Test-Split method. This chart 
                             shows the University of Michigan's Consumer Sentiment Relative rating for those months, based on the number of responses that 
                             indicated the month as a good time to buy, an uncertain time, or a bad time to buy. There did seem to be a trend in the responses 
-                            that showed it was almost never a bad time to buy, but there is clear variation between the months. Our model used the closing price 
+                            that showed it was almost never a bad time to buy, but there is clear variation between the months. Our model used the opening price, closing price, 
                             and volume for six publicly traded stocks (Ford, General Motors, Hyundai, Ferrari, Toyota, and Tata Motors) to predict the relative 
                             value for the first eight trading days in November of 2017.<br><br>One error we encountered with this model is an overestimation of the 
                             relative value for those days in November. One potential factor in this is the rising value of Ferrari's stock. In a six month span, 
-                            from January 2017 to June 2017, RACE rose nearly 50%. In the next three months, it rose another 25%. None of the other stocks saw 
+                            from January 2017 to June 2017, RACE rose nearly 50%. In the next three months, it rose another 33%. None of the other stocks saw 
                             success anywhere near this level. In other words, our model is really excited about buying a Ferrari. 
                         </p>
                     </div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class='col-10'>
-                    <h5 id='chartHeader'>Average Relative Stock Value in 2017</h5>
+                    <h5 id='chartHeader'>Average Relative Value in 2017</h5>
                     <div id='chart'>
 
                     </div>

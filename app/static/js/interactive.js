@@ -121,7 +121,7 @@ function dataCharting(activeDate) {
             stockPrices.append('li')
                 .classed('stockListBelowChart', true)
                 .attr('value', stockSymbol)
-                .text(`${stockSymbol} Closing Price: $${stock.Close}, Volume: ${stock.Volume}`);   
+                .text(`${stockSymbol} Closing Price: $${stock.Close}, Opening Price: $${stock.Open}, Volume: ${stock.Volume}`);   
         });
 
     }); // End of Promise.all with JSON grabs.
