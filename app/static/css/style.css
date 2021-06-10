@@ -62,3 +62,7 @@ a {
 #tableau {
     text-align: center;
 }
+
+.tableauPlaceholder {
+    margin: 50px 50px 50px 50px;
+}
