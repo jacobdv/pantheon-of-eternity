@@ -14,5 +14,9 @@ https://www.quandl.com/data/UMICH-Consumer-Sentiment?keyword=vehicle
 * That joined data frame will be used to train the model using the sentiment values: Good time to Buy,	Uncertain,	Bad time to Buy to help predict a stock price.
 * Initially we're targeting a linear ML model.
 
+## Project 3 Final Site
+
+https://pantheon-of-eternity.herokuapp.com/
+
 
 
